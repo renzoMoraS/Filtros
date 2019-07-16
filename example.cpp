@@ -12,6 +12,9 @@ int main(int argc , char* argv[]){
 	ppm img1(img_1);
 	cout << "Aplicando filtro"<< endl;
 	//noFilter(img1);
+	//blackWhite(img1);
+	//blackWhite(img1,8);
+	//brightness(200,img1);
 	contrast(img1,-200);
 	cout << "Escribiendo imagen" << endl;
 	img1.write("imgs/resultado.ppm");		
