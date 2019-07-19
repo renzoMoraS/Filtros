@@ -21,4 +21,5 @@ void brightness(float b, ppm& img);
 void frame(int x, pixel color, ppm& img);
 void boxBlur(ppm &img);
 void zoom(ppm &img, ppm &img_zoomed);
+void crop(ppm &img, int k, int t);
 void noFilter(ppm& img);
