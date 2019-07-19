@@ -16,7 +16,7 @@ void setPixel(int i, int j, pixel p, ppm& img);
 void blackWhite(ppm& img);
 void contrast(ppm& img, float contrast);
 void blackWhite(ppm& img, unsigned char shades);
-void merge(ppm& img1, ppm& img2, float p1, float p2);
+void merge(ppm& img1, ppm& img2, float p1);
 void brightness(float b, ppm& img);
 void frame(int x, pixel color, ppm& img);
 void boxBlur(ppm &img);

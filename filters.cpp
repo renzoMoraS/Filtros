@@ -21,7 +21,7 @@ unsigned char truncate(int color){
 //FILTERS
 
 void noFilter(ppm& img){
-	cout << "Applying noFilter..." << endl;
+	cout << "Aplicando noFilter..." << endl;
 	for(int i=0;i<img.height;i++){
 		for(int j=0;j<img.width;j++){
 			setPixel(i,j,img.bitmap[i][j],img);
@@ -32,7 +32,7 @@ void noFilter(ppm& img){
 
 void blackWhite(ppm& img){
 	//TODO
-	cout << "Applying blackWhite..." << endl;
+	cout << "Aplicando blackWhite..." << endl;
 	for(int i=0;i<img.height;i++){
 		for(int j=0;j<img.width;j++){
 			int r = img.bitmap[i][j].r;
@@ -51,7 +51,7 @@ void blackWhite(ppm& img){
 
 void contrast(ppm& img, float contrast){
 	//TODO
-		cout << "Applying contrast..." << endl;
+		cout << "Aplicando contrast..." << endl;
 	for(int i=0;i<img.height;i++){
 		for(int j=0;j<img.width;j++){
 			int r = img.bitmap[i][j].r;
@@ -75,7 +75,7 @@ void contrast(ppm& img, float contrast){
 
 void blackWhite(ppm& img, unsigned char shades){
 	//TODO
-	cout << "Applying blackWhite2..." << endl;
+	cout << "Aplicando blackWhite2..." << endl;
 	for(int i=0;i<img.height;i++){
 		for(int j=0;j<img.width;j++){
 			int r = img.bitmap[i][j].r;
@@ -95,37 +95,51 @@ void blackWhite(ppm& img, unsigned char shades){
 	return;
 }
 
-void merge(ppm& img1, ppm& img2, float p1, float p2){
+void merge(ppm& img1, ppm& img2, float p1){
 	//TODO
-	cout << "Applying merge..." << endl;
+	cout << "Aplicando merge..." << endl;
 
 	p1 = p1/100;
-	p2 = 1 - p1;
+	float p2 = 1 - p1;
+
+	ppm imgMerge(img1.width,img1.height);
 
 	for(int i=0;i<img1.height;i++){
 		for(int j=0;j<img1.width;j++){
-			int r = img2.bitmap[i][j].r;
-			int g = img2.bitmap[i][j].g;
-			int bl = img2.bitmap[i][j].b;
+
+			int r1 = img1.bitmap[i][j].r;
+			int g1 = img1.bitmap[i][j].g;
+			int bl1 = img1.bitmap[i][j].b;
+
+			int r2 = img2.bitmap[i][j].r;
+			int g2 = img2.bitmap[i][j].g;
+			int bl2 = img2.bitmap[i][j].b;
 			pixel n;
 
-			r = r * p1 + r * p2;
-			g = g * p1 + g * p2 ;
-			bl = bl * p1 + bl * p2;
+			int r = r1 * p1 + r2 * p2;
+			int g = g1 * p1 + g2 * p2;
+			int bl = bl1 * p1 + bl2 * p2;
+
+			r = truncate(r);
+			g = truncate(g);
+			bl = truncate(bl);
 
 			n.r = r;
 			n.g = g;
 			n.b = bl;
 
-			setPixel(i,j,n,img1);
+			setPixel(i,j,n,imgMerge);
 		}
 	}	
+
+	img1 = imgMerge; 
+
 	return;	
 }
 
 void brightness(float b, ppm& img){
 	//TODO
-	cout << "Applying brightness..." << endl;
+	cout << "Aplicando brightness..." << endl;
 
 	b = b/100;
 
@@ -190,7 +204,7 @@ void frame(int x, pixel color, ppm& img){
 
 void boxBlur(ppm &img){
 	//TODO
-	cout << "Applying bloxBlur..." << endl;
+	cout << "Aplicando bloxBlur..." << endl;
 
 	int r;
 	int g;

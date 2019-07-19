@@ -16,37 +16,37 @@ int main(int argc , char* argv[]){
 	int r = 0;
 	int g = 0;
 	int b = 0;
+
+	cout << "FILTROS" << endl;
+	cout << "0: No Filter" << endl;
+	cout << "1: Black & White" << endl;
+	cout << "2: GrayScale" << endl;
+	cout << "3: Brightness" << endl;
+	cout << "4: Contrast" << endl;
+	cout << "5: Merge" << endl;
+	cout << "6: Crop" << endl;
+	cout << "7: Frame" << endl;
+	cout << "8: Box Blur" << endl;
+	cout << "9: Zoom" << endl;
+	cout << endl;
+
 	cout << "Ingresar id del filtro a utilizar: ";
 	cin >> filtro;
 	cout << endl;
-	cout << "Ingresar id del tipo de threading: ";
+	cout << "Ingresar id del tipo de threading (no terminado, no poner nada): ";
 	cin >> threading;
 	cout << endl;
 
-	if (filtro == 2 || filtro == 3 || filtro == 4 || filtro == 7){
-		cout << "Ingresar primer parametro: ";
-		cin >> param1;
-		cout << endl;
-		if (filtro == 7){
-			cout << "Ingresar red: ";
-			cin >> r;
-			cout << endl;
-			cout << "Ingresar green: ";
-			cin >> g;
-			cout << endl;
-			cout << "Ingresar blue: ";
-			cin >> b;
-			cout << endl;
-		}
-		
-	}
 
-	if (filtro == 5 || filtro == 6){
-		cout << "Ingresar primer parametro: ";
-		cin >> param1;
+	if (filtro == 7){
+		cout << "Ingresar red: ";
+		cin >> r;
 		cout << endl;
-		cout << "Ingresar segundo parametro: ";
-		cin >> param2;
+		cout << "Ingresar green: ";
+		cin >> g;
+		cout << endl;
+		cout << "Ingresar blue: ";
+		cin >> b;
 		cout << endl;
 	}
 
@@ -62,81 +62,83 @@ int main(int argc , char* argv[]){
 
 	ppm img1(imgA);
 	ppm img2(imgB);
+	ppm imgzoomed(img1.width * 2,img1.height * 2);
 
 	pixel pix;
 	pix.r = r;
 	pix.g = g;
 	pix.b = b;
 
-	ppm imgzoomed(img1.width * 2,img1.height * 2);
-
-	switch (filtro)
-	{
+	switch (filtro){
 	case 0:
-		cout << "Aplicando filtro"<< endl;
 		noFilter(img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
 		break;
 	case 1:
-		cout << "Aplicando filtro"<< endl;
 		blackWhite(img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
 		break;
 	case 2:
-		cout << "Aplicando filtro"<< endl;
+		cout << "Ingresar cantidad de grises (0,255): ";
+		cin >> param1;
 		blackWhite(img1,param1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
 		break;
 	case 3:
-		cout << "Aplicando filtro"<< endl;
+		cout << "Ingresar porcentaje de brillo (0,100): ";
+		cin >> param1;
 		brightness(param1,img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
 		break;
 	case 4:
-		cout << "Aplicando filtro"<< endl;
+		cout << "Ingresar factor de intensidad de contraste (-255,255): ";
+		cin >> param1;
 		contrast(img1,param1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 5:
-		cout << "Aplicando filtro"<< endl;
-		merge(img1,img2,param1,param2);
+		cout << "Ingresar porcentaje de mezclado de la primer imagen (0,100): ";
+		cin >> param1;
+		merge(img1,img2,param1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 6:
-		cout << "Aplicando filtro"<< endl;
+		cout << "Ingresar k filas a cortar: ";
+		cin >> param1;
+		cout << "Ingresar t filas a cortar: ";
+		cin >> param2;
 		crop(img1,param1,param2);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 7:
-		cout << "Aplicando filtro"<< endl;
+		cout << "Ingresar tamaño del frame en pixeles: ";
+		cin >> param1;
 		frame(param1,pix,img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 8:
-		cout << "Aplicando filtro"<< endl;
 		boxBlur(img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 9:
-		cout << "Aplicando filtro"<< endl;
 		zoom(img1,imgzoomed);
 		cout << "Escribiendo imagen" << endl;
 		imgzoomed.write("imgs/resultado.ppm");
@@ -152,7 +154,7 @@ int main(int argc , char* argv[]){
 	// TERMINADO blackWhite(img1,8);
 	// TERMINADO brightness(200,img1);
 	// TERMINADO contrast(img1,-200);
-	// NO TERMINADO merge(img1,img2,30,70);
+	// TERMINADO merge(img1,img2,30,70);
 	// TERMINADO crop(img1,50,50);
 	// TERMINADO frame(30,pix,img1);
 	// TERMINADO boxBlur(img1);
