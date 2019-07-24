@@ -1,0 +1,42 @@
+SIN THREADS:
+noFilter:
+1º: 2.2692
+2º: 4.55192
+3º: 0.0462844
+4º: 16.9444
+5º: 4.76975
+6º: 0.0461892
+7º: 6.72707
+8º: 0.0455656
+9º: 0.0448918
+10º: 0.0448746
+blackWhite:
+1º: 0.0519955
+2º: 0.543171
+3º: 3.95303
+4º: 0.0527122
+5º: 0.0535503
+6º: 0.0528258
+7º: 0.0516742
+8º: 0.0536373
+9º: 9.14861
+10º: 1.51762
+blackWhite(Escala):
+brightness:
+contrast:
+merge:
+crop:
+frame:
+boxBlur:
+zoom:
+CON THREADS:
+noFilter:
+blackWhite:
+blackWhite(Escala):
+brightness:
+contrast:
+merge:
+crop:
+frame:
+boxBlur:
+zoom:
