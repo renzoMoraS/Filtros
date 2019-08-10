@@ -5,7 +5,13 @@
 #include "ppm.h"
 #define BLACK 0
 
-
+struct data{
+    unsigned char nthreads;
+    ppm *img1;
+    float param1;
+    float param2;
+    unsigned char thid;
+};
 //USEFUL FUNCTIONS
 unsigned char truncate(int color);
 void setPixel(int i, int j, pixel p, ppm& img);

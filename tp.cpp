@@ -5,11 +5,11 @@
 #include <chrono>
 #include <pthread.h>
 #include "filters.h"
-#define NUM_THREADS 2
 using namespace std;
 int main(int argc , char* argv[]){
 
 	int singlethread;
+	int rc;
 	int i;
 	int multithread;
 	int param1;
@@ -20,8 +20,6 @@ int main(int argc , char* argv[]){
 	int g = 0;
 	int b = 0;
 
-	pthread_t threads[NUM_THREADS];
-
 	singlethread = atoi(argv[1]);
 	multithread = atoi(argv[2]);
 
@@ -29,16 +27,33 @@ int main(int argc , char* argv[]){
 	pix.r = 0;
 	pix.g = 0;
 	pix.b = 0;
-
+	data d;
 	if (singlethread == 0 || singlethread == 1 || singlethread == 8 || singlethread == 9){
 		imgA = string(argv[3]);
-	}else if (singlethread == 2 || singlethread == 3 || singlethread == 4 || singlethread == 5|| singlethread == 7){
+	}else if (singlethread == 2 || singlethread == 3 || singlethread == 4 || singlethread == 5){
 		param1 = atoi(argv[3]);
 		imgA = string(argv[4]);
 		if (singlethread == 5){
 			imgB = string(argv[5]);
 		}	
-	}else if (singlethread == 6){
+	}else if (singlethread == 6 ){
+		param1 = atoi(argv[3]);
+		param2 = atoi(argv[4]);
+		imgA = string(argv[5]);
+	}
+	else if (singlethread == 7 ){
+		param1 = atoi(argv[3]);
+		param2 = atoi(argv[4]);
+	}
+	if (multithread == 0 || multithread == 7 || multithread == 8){
+		imgA = string(argv[3]);
+	}else if (multithread == 1 || multithread == 2 || multithread == 3 || multithread == 4|| multithread == 7){
+		param1 = atoi(argv[3]);
+		imgA = string(argv[4]);
+		if (multithread == 5){
+			imgB = string(argv[5]);
+		}	
+	}else if (singlethread == 5){
 		param1 = atoi(argv[3]);
 		param2 = atoi(argv[4]);
 		imgA = string(argv[5]);
@@ -93,6 +108,9 @@ int main(int argc , char* argv[]){
 		break;
 	case 7:
 		frame(param1,pix,img1);
+		pix.r = param1;
+		pix.g = param1;
+		pix.b = param1;
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
@@ -114,65 +132,55 @@ int main(int argc , char* argv[]){
 	}
 	/*switch (multithread){
 	case 0:
-		for( i = 0; i < NUM_THREADS; i++ ) {
-      	cout << "Creando threads: " << i << endl;
-      	pthread_create(&threads[i], NULL, noFilter(img1), (void *)i);
-		}
+		blackWhiteThread(img1);
 		cout << "Escribiendo imagen" << endl;
-		img1.write("imgs/resultado.ppm");
+		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
-		pthread_exit(NULL);
 		break;
 	case 1:
-		blackWhite(img1);
+		blackWhiteThread(img1,param1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
 		break;
 	case 2:
-		blackWhite(img1,param1);
+		brightnessThread(param1,img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");		
 		cout << "Listo" << endl;
 		break;
 	case 3:
-		brightness(param1,img1);
+		contrastThread(img1,param1);
 		cout << "Escribiendo imagen" << endl;
-		img1.write("imgs/resultado.ppm");		
+		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 4:
-		contrast(img1,param1);
+		mergeThread(img1,img2,param1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 5:
-		merge(img1,img2,param1);
+		cropThread(img1,param1,param2);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 6:
-		crop(img1,param1,param2);
+		frameThread(param1,pix,img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 7:
-		frame(param1,pix,img1);
+		boxBlurThread(img1);
 		cout << "Escribiendo imagen" << endl;
 		img1.write("imgs/resultado.ppm");
 		cout << "Listo" << endl;
 		break;
 	case 8:
-		boxBlur(img1);
-		cout << "Escribiendo imagen" << endl;
-		img1.write("imgs/resultado.ppm");
-		cout << "Listo" << endl;
-		break;
-	case 9:
-		zoom(img1,imgzoomed);
+		zoomThread(img1,imgzoomed);
 		cout << "Escribiendo imagen" << endl;
 		imgzoomed.write("imgs/resultado.ppm");
 		cout << "Listo" <<  endl;
