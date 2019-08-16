@@ -284,7 +284,8 @@ void zoom(ppm &img, ppm &img_zoomed){
 	//TODO
 	//Tener en cuenta que img_zoomed debe ser una imagen "vacia" previamente creada con el tamáño adecuado
 	cout << "Aplicando zoom..." << endl;
-	int newSize = sqrt(img_zoomed.size / img.size);
+	int newSize = img_zoomed.height / img.height;
+	cout << newSize;
 	int cont1 = 0;
 	int cont2 = 0;
 
@@ -299,11 +300,24 @@ void zoom(ppm &img, ppm &img_zoomed){
 			n.r = r;
 			n.g = g;
 			n.b = bl;
-
+			
 			setPixel(cont1,cont2,n,img_zoomed);
-			setPixel(cont1,cont2+1,n,img_zoomed);
-			setPixel(cont1+1,cont2,n,img_zoomed);
-			setPixel(cont1+1,cont2+1,n,img_zoomed);
+
+			if (newSize == 2){
+				setPixel(cont1,cont2+1,n,img_zoomed);
+				setPixel(cont1+1,cont2,n,img_zoomed);
+				setPixel(cont1+1,cont2+1,n,img_zoomed);	
+			}else if(newSize == 3){
+				setPixel(cont1,cont2+1,n,img_zoomed);
+				setPixel(cont1+1,cont2,n,img_zoomed);
+				setPixel(cont1+1,cont2+1,n,img_zoomed);
+				setPixel(cont1,cont2+2,n,img_zoomed);
+				setPixel(cont1+2,cont2,n,img_zoomed);
+				setPixel(cont1+2,cont2+1,n,img_zoomed);
+				setPixel(cont1+1,cont2+2,n,img_zoomed);
+				setPixel(cont1+2,cont2+2,n,img_zoomed);
+			}	
+			
 			cont2 = cont2 + newSize;
 		}
 		cont1 = cont1 + newSize;

@@ -41,7 +41,6 @@ int main(int argc , char* argv[]){
 
 	ppm img1(imgA);
 	ppm img2(imgB);
-	ppm imgzoomed(img1.width * 2,img1.height * 2);
 
 	switch (filtro){
 	case 0:
@@ -99,6 +98,7 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 9:
+		ppm imgzoomed(img1.width * 3,img1.height * 3);
 		zoom(img1,imgzoomed);
 		cout << "Escribiendo imagen" << endl;
 		imgzoomed.write("imgs/resultado.ppm");
