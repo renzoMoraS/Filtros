@@ -26,21 +26,28 @@ int main(int argc , char* argv[]){
 	pix.b = 0;
 
 	if (filtro == 0 || filtro == 1 || filtro == 8 || filtro == 9){
-		imgA = string(argv[3]);
-	}else if (filtro == 2 || filtro == 3 || filtro == 4 || filtro == 5|| filtro == 7){
+		imgA = string(argv[4]);
+	}else if (filtro == 2 || filtro == 3 || filtro == 4 || filtro == 5){
 		param1 = atoi(argv[3]);
 		imgA = string(argv[4]);
 		if (filtro == 5){
 			imgB = string(argv[5]);
 		}	
-	}else if (filtro == 6){
+	}else if (filtro == 6 || filtro == 7){
 		param1 = atoi(argv[3]);
 		param2 = atoi(argv[4]);
 		imgA = string(argv[5]);
+		if (filtro == 7){
+			pix.r = param2;
+			pix.g = param2;
+			pix.b = param2;
+		}
 	}
 
 	ppm img1(imgA);
 	ppm img2(imgB);
+
+	ppm imgzoomed(img1.width * atoi(argv[3]),img1.height * atoi(argv[3]));
 
 	switch (filtro){
 	case 0:
@@ -98,7 +105,6 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 9:
-		ppm imgzoomed(img1.width * 3,img1.height * 3);
 		zoom(img1,imgzoomed);
 		cout << "Escribiendo imagen" << endl;
 		imgzoomed.write("imgs/resultado.ppm");
