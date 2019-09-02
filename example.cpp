@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <chrono>
 #include <stdlib.h>
 #include <vector>
 #include "filters.h"
@@ -74,7 +75,12 @@ int main(int argc , char* argv[]){
 			blackWhite(img1);
 		}
 		cout << "Escribiendo imagen" << endl;
-		img1.write("imgs/resultado.ppm");		
+		auto start = std::chrono::system_clock::now();
+		img1.write("imgs/resultado.ppm");
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> elapsed_seconds = end - start;
+		std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+		std::cout << "Le tomo ejecutarse: " << elapsed_seconds.count() << " segundos" << endl;	
 		cout << "Listo" << endl;
 		break;
 	case 2:
@@ -93,7 +99,7 @@ int main(int argc , char* argv[]){
 			blackWhite(img1,param1);
 		}
 		cout << "Escribiendo imagen" << endl;
-		img1.write("imgs/resultado.ppm");		
+		img1.write("imgs/resultado.ppm");			
 		cout << "Listo" << endl;
 		break;
 	case 3:

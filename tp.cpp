@@ -189,8 +189,4 @@ int main(int argc , char* argv[]){
 		break;
 	}
 	 */
-	auto end = std::chrono::system_clock::now();
-	std::chrono::duration<double> elapsed_seconds = end-start;
-	std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-	std::cout << "Le tomo ejecutarse: " << elapsed_seconds.count() << " segundos" << endl;
 }
