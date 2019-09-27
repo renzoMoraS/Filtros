@@ -61,13 +61,10 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 1:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "blackWhite1";
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			data_in.img1 = imgt;
 			thread_handler(data_in);
@@ -75,23 +72,15 @@ int main(int argc , char* argv[]){
 			blackWhite(img1);
 		}
 		cout << "Escribiendo imagen" << endl;
-		auto start = std::chrono::system_clock::now();
-		img1.write("imgs/resultado.ppm");
-		auto end = std::chrono::system_clock::now();
-		std::chrono::duration<double> elapsed_seconds = end - start;
-		std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-		std::cout << "Le tomo ejecutarse: " << elapsed_seconds.count() << " segundos" << endl;	
+		img1.write("imgs/resultado.ppm");	
 		cout << "Listo" << endl;
 		break;
 	case 2:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "blackWhite2";
 			data_in.p1 = param1;
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			data_in.img1 = imgt;
 			thread_handler(data_in);
@@ -103,14 +92,11 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 3:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "brightness";
 			data_in.p1 = param1;
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			data_in.img1 = imgt;
 			thread_handler(data_in);
@@ -122,14 +108,11 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 4:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "contrast";
 			data_in.p1 = param1;
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			data_in.img1 = imgt;
 			thread_handler(data_in);
@@ -141,14 +124,11 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 5:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "merge";
 			data_in.p1 = param1;
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			ppm* imgt2 = &img2;
 			ppm* imgM = &imgMo;
@@ -179,13 +159,10 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 8:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "boxBlur";
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			data_in.img1 = imgt;
 			thread_handler(data_in);
@@ -197,13 +174,10 @@ int main(int argc , char* argv[]){
 		cout << "Listo" << endl;
 		break;
 	case 9:
-		if (threading == 1){
-			cout << "Ingrese cantidad de threads(menos 0): ";
-			cin >> ct;
-			cout << "" <<endl;
+		if (threading > 1){
 			struct data data_in;
 			data_in.filtro = "zoom";
-			data_in.n_threads = ct;
+			data_in.n_threads = threading;
 			ppm* imgt = &img1;
 			ppm* imgt2 = &imgzoomed;
 			ppm* imgt3 = &imgzoomed2;
