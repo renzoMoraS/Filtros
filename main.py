@@ -1,28 +1,29 @@
-import os
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+import os,subprocess
 
 
 img_size = [4000,4000,4000,4000]
 mt_times = []
 st_times = []
+os.chdir(r"C:\cygwin64\bin")
 for imageIndex in range(0,4):
    
-    cmd_multithread  = "tp 1 4 imgs/img" + str(imageIndex)+".ppm"
-    cmd_singlethread = "tp 1 1 imgs/img" + str(imageIndex)+".ppm"
+    cmd_multithread  = "bash", "-c", '. /etc/profile; cd /cygdrive/c/Users/alumno/Desktop/Filtros;./tp.exe 1 4 imgs/img' + str(imageIndex)+'.ppm'
+    cmd_singlethread = "bash", "-c", '. /etc/profile; cd /cygdrive/c/Users/alumno/Desktop/Filtros;./tp.exe 1 1 imgs/img' + str(imageIndex)+'.ppm'
     mt_trial_times = []
     st_trial_times = []
     
     for trial in range(0,10):
         
         start = time.time()
-        os.system(cmd_multithread)
+        ret = subprocess.call(cmd_multithread)
         finish = time.time()
         mt_trial_times.append((finish-start))
      
         start = time.time()
-        os.system(cmd_singlethread)
+        ret = subprocess.call(cmd_singlethread)
         finish = time.time()
         st_trial_times.append((finish-start))
     
